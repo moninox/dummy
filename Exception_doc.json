@@ -1,0 +1,1240 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "API",
+    "description": "",
+    "contact": {}
+  },
+  "host": "ter.tg.telefonica",
+  "basePath": "/ic/rest/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/compExceptions": {
+      "post": {
+        "description": "Esta operación es la encargada de asociar mensajes de error a componentes. Los datos de los mensajes a asociar y de los componentes a los cuales se le ha de asociar se encuentran dentro del parámetro listaCompExc que se incluye en la llamada como parte del body.",
+        "summary": "associate",
+        "operationId": "associate",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "listaCompExc",
+            "in": "body",
+            "required": true,
+            "description": "Detalle de las asociaciones a realizar",
+            "schema": {
+              "$ref": "#/definitions/associateRequest"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Usuario y password con autenticación Basic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/associateResponse"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "La autenticación no es válida"
+          }
+        }
+      },
+      "delete": {
+        "description": "Esta operación es la encargada de desasociar mensajes de error a componentes. Los datos de los mensajes a desasociar y de los componentes a los cuales se le ha de desasociar se encuentran dentro del parámetro listaCompExc que se incluye en la llamada como parte del body.",
+        "summary": "disassociate",
+        "operationId": "disassociate",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "listaCompExc",
+            "in": "body",
+            "required": true,
+            "description": "Detalle de las desasociaciones a realizar",
+            "schema": {
+              "$ref": "#/definitions/disassociateRequest"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Usuario y password con autenticación Basic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Devuelve un listado de los resultados obtenidos para cada una de las asociaciones con el siguiente modelo de datos:",
+            "schema": {
+              "$ref": "#/definitions/disassociateResponse"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "La autenticación no es válida"
+          }
+        }
+      }
+    },
+    "/compExceptions/environment/{environment}/component/{codeComponent}": {
+      "post": {
+        "description": "Esta operación es la encargada de asociar mensajes de error a un componente concreto. Si el mensaje de error ya existe, se asocia al componente y si no existe se crea y después se asocia al componente. Los datos de los mensajes a asociar se encuentran dentro del parámetro listaExc que se incluye en la llamada como parte del body.",
+        "summary": "associateExceptionsToComponent",
+        "operationId": "associateExceptionsToComponent",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "listaExc",
+            "in": "body",
+            "required": true,
+            "description": "Detalle de las asociaciones a realizar",
+            "schema": {
+              "$ref": "#/definitions/associateExceptionsToComponentRequest"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código del entorno"
+          },
+          {
+            "name": "codeComponent",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código del componente"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Usuario y password con autenticación Basic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/associateExceptionsToComponentResponse"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "La autenticación no es válida"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "summary": "disassociateExceptionsToComponent",
+        "operationId": "disassociateExceptionsToComponent",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/disassociateExceptionsToComponentRequest"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "codeComponent",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Usuario y password con autenticación Basic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "La autenticación no es válida"
+          }
+        }
+      },
+      "get": {
+        "description": "Esta operación es la encargada de obtener el listado de los mensajes de error asociados al componente indicado en el entorno también indicado.",
+        "summary": "list",
+        "operationId": "list",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código del entorno"
+          },
+          {
+            "name": "codeComponent",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código del componente"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Usuario y password con autenticación Basic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/associateExceptionsToComponentRequest"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "La autenticación no es válida"
+          },
+          "404": {
+            "description": "El componente no existe en el entorno indicado"
+          },
+          "500": {
+            "description": "Error interno del servidor al realizar la consulta de los datos"
+          }
+        }
+      }
+    },
+    "/compExceptions/environment/{environment}": {
+      "delete": {
+        "description": "Esta operación es la encargada de desasociar una lista mensajes de error a una lista de componentes. Los datos de los mensajes a desasociar y los componentes a los cuales se les va a desasociar se encuentran dentro del parámetro listaDatos que se incluye en la llamada como parte del body.",
+        "summary": "disassociateExceptionsToComponents",
+        "operationId": "disassociateExceptionsToComponents",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "listaDatos",
+            "in": "body",
+            "required": true,
+            "description": "Códigos de los mensajes",
+            "schema": {
+              "$ref": "#/definitions/disassociateExceptionsToComponentRequest"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código del entorno"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Usuario y password con autenticación Basic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/disassociateExceptionsToComponentResponse"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "La autenticación no es válida"
+          }
+        }
+      },
+      "post": {
+        "description": "Esta operación es la encargada de asociar una lista de mensajes de error a una lista de componentes. Los datos de los mensajes a asociar y los componentes a los cuales se asocian se encuentran dentro del parámetro listaDatos que se incluye en la llamada como parte del body.",
+        "summary": "associateExceptionsToComponents",
+        "operationId": "associateExceptionsToComponents",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "listaDatos",
+            "in": "body",
+            "required": true,
+            "description": "Códigos de los componentes y de los mensajes",
+            "schema": {
+              "$ref": "#/definitions/associateExceptionsToComponentsRequest"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código del entorno"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Usuario y password con autenticación Basic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/associateExceptionsToComponentsResponse"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "La autenticación no es válida"
+          }
+        }
+      }
+    },
+    "/exceptions/environment/{environment}": {
+      "post": {
+        "description": "Esta operación es la encargada de crear un nuevo mensaje de error a partir de los datos incluidos en el body.",
+        "summary": "create",
+        "operationId": "Postcreate",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "messageData",
+            "in": "body",
+            "required": true,
+            "description": "Datos del mensaje de error",
+            "schema": {
+              "$ref": "#/definitions/exceptionsEnvironmentResquest"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código del entorno"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Usuario y password con autenticación Basic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/exceptionsEnvironmentResponse"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "La autenticación no es válida"
+          },
+          "406": {
+            "description": "Alguno de los campos del mensaje no se encuentra informado"
+          },
+          "409": {
+            "description": "Ya existe un mensaje de error con los mismos datos"
+          },
+          "500": {
+            "description": "Error interno del servidor al obtener los detalles del mensaje de error"
+          }
+        }
+      },
+      "get": {
+        "description": "Esta operación es la encargada de obtener el listado de los mensajes de error existentes en el entorno indicado.",
+        "summary": "list",
+        "operationId": "Getlist1",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código del entorno"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Usuario y password con autenticación Basic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/exceptionsEnvironmentResponseAuth"
+            },
+            "headers": {},
+            "examples": {
+              "application/json": "[{\n        \"key\": \"1\",\n        \"id\": \"SVC0001\",\n        \"message\": \"Generic Client Error\",\n        \"common\": \"common\",\n        \"codeHTTP\": \"400 BAD REQUEST\",\n        \"description\": \"UNICA API Generic wildcard fault response\",\n        \"text\": \"Generic Client Error: %1\\\" %1 - additional info\",\n        \"type\": \"service\",\n        \"group\": \"\",\n        \"authorized\": true\n    }, {\n        …\n    }\n]\n"
+            }
+          },
+          "401": {
+            "description": "La autenticación no es válida"
+          }
+        }
+      }
+    },
+    "/exceptions/environment/{environment}/{keyException}": {
+      "put": {
+        "description": "Esta operación es la encargada de modificar un mensaje de error existente a partir de la clave y los datos incluidos en el body.",
+        "summary": "modify",
+        "operationId": "modify",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "messageData",
+            "in": "body",
+            "required": true,
+            "description": "Datos del mensaje de error",
+            "schema": {
+              "$ref": "#/definitions/modifyRequest"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código del entorno"
+          },
+          {
+            "name": "keyException",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código interno del mensaje"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Usuario y password con autenticación Basic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/modifyResponse"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "La autenticación no es válida"
+          }
+        }
+      },
+      "delete": {
+        "description": "Esta operación es la encargada de borrar un mensaje de error existente a partir de la clave del mismo.",
+        "summary": "delete",
+        "operationId": "delete",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código del entorno"
+          },
+          {
+            "name": "keyException",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código interno del mensaje"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Usuario y password con autenticación Basic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          },
+          "401": {
+            "description": "La autenticación no es válida"
+          }
+        }
+      }
+    },
+    "/exceptions/environment/{environment}/{keyException}/all": {
+      "delete": {
+        "description": "Esta operación es la encargada de borrar un mensaje de error existente a partir de la clave del mismo, borrando también las relaciones de dicha excepción con los componentes.",
+        "summary": "deleteAll",
+        "operationId": "deleteAll",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código del entorno"
+          },
+          {
+            "name": "keyException",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código interno del mensaje"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Usuario y password con autenticación Basic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          },
+          "401": {
+            "description": "La autenticación no es válida"
+          }
+        }
+      }
+    },
+    "/exceptions/environment/{environment}/key/{keyException}": {
+      "get": {
+        "description": "Esta operación es la encargada de obtener los detalles de un mensaje de error existente en TER, siempre a partir de la clave interna de TER. Esta operación devuelve todos los datos asociados al mensaje.",
+        "summary": "getKey",
+        "operationId": "getKey",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código del entorno"
+          },
+          {
+            "name": "keyException",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código interno del mensaje"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Usuario y password con autenticación Basic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/getEnvironmentByKeyResponse"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "La autenticación no es válida"
+          }
+        }
+      }
+    },
+    "/exceptions/environment/{environment}/id/{idException}": {
+      "get": {
+        "description": "Esta operación es la encargada de obtener los detalles de un mensaje de error existente en TER a partir del identificador del mismo. Como el identificador no es único, el API puede devolver los datos de 1 o más mensajes de error. Esta operación devuelve todos los datos asociados a cada uno de los mensajes que verifican el criterio de búsqueda.",
+        "summary": "getId",
+        "operationId": "getId",
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Código del entorno"
+          },
+          {
+            "name": "idException",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Identificador del mensaje"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "description": "Usuario y password con autenticación Basic",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/getEnvironmentByIdResponse"
+            },
+            "headers": {}
+          },
+          "401": {
+            "description": "La autenticación no es válida"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "associateRequest": {
+      "title": "associateRequest",
+      "description": "Detalle de las asociaciones a realizar",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "component": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "string",
+            "description": "Si el entorno no se encuentra informado, se sobreentiende que se trata de DE."
+          }
+        }
+      }
+    },
+    "associateResponse": {
+      "title": "associateResponse",
+      "description": "",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "A primer nivel nos encontramos con los siguientes campos:\n- state – contiene el estado de la respuesta obtenido\n- message – contiene el mensaje asociado al estado de la respuesta\n- data – contiene los datos de entrada para los cuales se ha obtenido el estado anterior. Cada uno de éstos data se corresponde con los datos de entrada incluidos por el usuario.\n\nLos posibles state son los siguientes:\n- CREATED – contiene los datos de las relaciones creadas\n- CONFLICT – contiene los datos de las relaciones que ya se encontraban dadas de alta\n- NOT_FOUND – contiene los datos de las relaciones que no se han podido dar de alta porque el componente o la clave de la excepción no existe. Para poder diferenciar ambos tipos, aparecerán dos grupos diferenciados por el mensaje asociado a cada uno de ellos.\n- NOT_ACCEPTABLE – contiene los datos de las relaciones que no se han podido procesar porque alguno de sus datos es null\n- INTERNAL_SERVER_ERROR – contiene los datos de la relación que no se ha podido procesar por la generación de un error interno del servidor\n- NOT_MODIFIED – contiene los datos de las relaciones que no se han podido procesar debido al error interno del servidor\n"
+          },
+          "message": {
+            "type": "string",
+            "description": "contiene el mensaje asociado al estado de la respuesta"
+          },
+          "data": {
+            "$ref": "#/definitions/associateRequest"
+          }
+        }
+      }
+    },
+    "disassociateRequest": {
+      "title": "disassociateRequest",
+      "description": "Detalle de las desasociaciones a realizar",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "component": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "string",
+            "description": "Si el entorno no se encuentra informado, se sobreentiende que se trata de DE."
+          }
+        }
+      }
+    },
+    "disassociateResponse": {
+      "title": "disassociateRequest",
+      "description": "",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "A primer nivel nos encontramos con los siguientes campos:\n- state – contiene el estado de la respuesta obtenido\n- message – contiene el mensaje asociado al estado de la respuesta\n- data – contiene los datos de entrada para los cuales se ha obtenido el estado anterior. Cada uno de éstos data se corresponde con los datos de entrada incluidos por el usuario.\n\nLos posibles state son los siguientes:\n- OK – contiene los datos de las relaciones eliminadas\n- NOT_FOUND – contiene los datos de las relaciones que no se han podido eliminar porque el componente o la relación no existe. También se muestran bajo este state el caso en el cual la clave de la excepción no se ha incluido. Para poder diferenciar los tipos, aparecerán grupos diferenciados por el mensaje asociado a cada uno de ellos.\n- INTERNAL_SERVER_ERROR – contiene los datos de la relación que no se ha podido procesar por la generación de un error interno del servidor\n- NOT_MODIFIED – contiene los datos de las relaciones que no se han podido procesar debido al error interno del servidor\n"
+          },
+          "message": {
+            "type": "string",
+            "description": "contiene el mensaje asociado al estado de la respuesta"
+          },
+          "data": {
+            "$ref": "#/definitions/disassociateRequest"
+          }
+        }
+      }
+    },
+    "associateExceptionsToComponentRequest": {
+      "title": "associateExceptionsToComponentRequest",
+      "description": "La estructura del parámetro listaExc es la siguiente\nA primer nivel nos encontramos con los siguientes campos:\n- key – contiene el código interno del mensaje de error dentro de TER\n- id – contiene el identificador del mensaje de error. Dicho identificador no tiene por qué ser único\n- mensaje – contiene el mensaje propiamente dicho\n- common – indica si el mensaje es común o específico\n- codeHTTP – contiene el código HTTP asociado al mensaje de error\n- description – contiene la descripción del mensaje de error\n- text – contiene el texto asociado al mensaje de error\n- type – contiene el tipo del mensaje: service, syntax, server, …\n- group – contiene el grupo propietario del mensaje\n",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "common": {
+            "type": "string"
+          },
+          "codeHTTP": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "associateExceptionsToComponentResponse": {
+      "title": "associateExceptionsToComponentRequest",
+      "description": "A primer nivel nos encontramos con los siguientes campos:\n- state – contiene el estado de la respuesta obtenido\n- message – contiene el mensaje asociado al estado de la respuesta\n- data – contiene los datos de entrada para los cuales se ha obtenido el estado anterior. Cada uno de éstos data se corresponde con los datos de entrada incluidos por el usuario.\n",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "contiene los datos de entrada para los cuales se ha obtenido el estado anterior. Cada uno de éstos data se corresponde con los datos de entrada incluidos por el usuario. Los posibles state son los siguientes:\n- CREATED – contiene los datos de las relaciones creadas\n- CONFLICT – contiene los datos de las relaciones que ya se encontraban dadas de alta\n- NOT_FOUND – contiene los datos de las relaciones que no se han podido dar de alta porque el componente o la clave de la excepción no existe. Para poder diferenciar ambos tipos, aparecerán dos grupos diferenciados por el mensaje asociado a cada uno de ellos.\n- NOT_ACCEPTABLE – contiene los datos de las relaciones que no se han podido procesar porque alguno de sus datos es null\n- INTERNAL_SERVER_ERROR – contiene los datos de la relación que no se ha podido procesar por la generación de un error interno del servidor\n- NOT_MODIFIED – contiene los datos de las relaciones que no se han podido procesar debido al error interno del servidor\"\n"
+          },
+          "message": {
+            "type": "string",
+            "description": "contiene el mensaje asociado al estado de la respuesta"
+          },
+          "data": {
+            "$ref": "#/definitions/associateExceptionsToComponentRequest"
+          }
+        }
+      }
+    },
+    "disassociateExceptionsToComponentRequest": {
+      "title": "disassociateExceptionsToComponentRequest",
+      "description": "La estructura del parámetro listaDatos es la siguiente:",
+      "type": "object",
+      "properties": {
+        "codes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "disassociateExceptionsToComponentResponse": {
+      "title": "disassociateExceptionsToComponentsRequest",
+      "description": "Devuelve un listado de los resultados obtenidos para cada una de las desasociaciones con el siguiente modelo de datos:",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "contiene los datos de entrada para los cuales se ha obtenido el estado anterior. Cada uno de éstos data se corresponde con los datos de entrada incluidos por el usuario. Los posibles state son los siguientes:\n- CREATED – contiene los datos de las relaciones creadas\n- CONFLICT – contiene los datos de las relaciones que ya se encontraban dadas de alta\n- NOT_FOUND – contiene los datos de las relaciones que no se han podido dar de alta porque el componente o la clave de la excepción no existe. Para poder diferenciar ambos tipos, aparecerán dos grupos diferenciados por el mensaje asociado a cada uno de ellos.\n- NOT_ACCEPTABLE – contiene los datos de las relaciones que no se han podido procesar porque alguno de sus datos es null\n- INTERNAL_SERVER_ERROR – contiene los datos de la relación que no se ha podido procesar por la generación de un error interno del servidor\n- NOT_MODIFIED – contiene los datos de las relaciones que no se han podido procesar debido al error interno del servidor\"\n"
+          },
+          "message": {
+            "type": "string",
+            "description": "contiene el mensaje asociado al estado de la respuesta"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "component": {
+                  "type": "string"
+                },
+                "environment": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "associateExceptionsToComponentsRequest": {
+      "title": "associateExceptionsToComponentsRequest",
+      "description": "La estructura del parámetro listaDatos es la siguiente:",
+      "type": "object",
+      "properties": {
+        "codes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "associateExceptionsToComponentsResponse": {
+      "title": "associateExceptionsToComponentsRequest",
+      "description": "La estructura del parámetro listaDatos es la siguiente:",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "contiene los datos de entrada para los cuales se ha obtenido el estado anterior. Cada uno de éstos data se corresponde con los datos de entrada incluidos por el usuario. Los posibles state son los siguientes:\n- CREATED – contiene los datos de las relaciones creadas\n- CONFLICT – contiene los datos de las relaciones que ya se encontraban dadas de alta\n- NOT_FOUND – contiene los datos de las relaciones que no se han podido dar de alta porque el componente o la clave de la excepción no existe. Para poder diferenciar ambos tipos, aparecerán dos grupos diferenciados por el mensaje asociado a cada uno de ellos.\n- NOT_ACCEPTABLE – contiene los datos de las relaciones que no se han podido procesar porque alguno de sus datos es null\n- INTERNAL_SERVER_ERROR – contiene los datos de la relación que no se ha podido procesar por la generación de un error interno del servidor\n- NOT_MODIFIED – contiene los datos de las relaciones que no se han podido procesar debido al error interno del servidor\"\n"
+          },
+          "message": {
+            "type": "string",
+            "description": "contiene el mensaje asociado al estado de la respuesta"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "environment": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "createRequest": {
+      "title": "createRequest",
+      "description": "",
+      "type": "object"
+    },
+    "modifyRequest": {
+      "title": "modifyRequest",
+      "description": "La estructura del parámetro messageData es la siguiente:",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "common": {
+            "type": "string"
+          },
+          "codeHTTP": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "modifyResponse": {
+      "title": "modifyRequest",
+      "description": "Devuelve el detalle completo del mensaje de error que acaba de crear, con el siguiente modelo de datos:",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "common": {
+            "type": "string"
+          },
+          "codeHTTP": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          }
+        },
+        "description": "Donde nos encontramos los siguientes campos:\n- key – contiene el código interno del mensaje de error dentro de TER\n- id – contiene el identificador del mensaje de error. Dicho identificador no tiene por qué ser único\n- mensaje – contiene el mensaje propiamente dicho\n- common – indica si el mensaje es común o específico\n- codeHTTP – contiene el código HTTP asociado al mensaje de error\n- description – contiene la descripción del mensaje de error\n- text – contiene el texto asociado al mensaje de error\n- type – contiene el tipo del mensaje: service, syntax, server,\n- group – contiene el grupo propietario del mensaje\n"
+      }
+    },
+    "exceptionsEnvironmentResquest": {
+      "title": "exceptionsEnvironmentResquest",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "common": {
+            "type": "string"
+          },
+          "codeHTTP": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "exceptionsEnvironmentResponse": {
+      "title": "exceptionsEnvironmentResponse",
+      "description": "Devuelve el listado de los mensajes de error con el siguiente modelo de datos:\nDonde a primer nivel nos encontramos con una lista formada por componentes que contienen los siguientes campos:\n- key – contiene el código interno del mensaje de error dentro de TER\n- id – contiene el identificador del mensaje de error. Dicho identificador no tiene por qué ser único\n- mensaje – contiene el mensaje propiamente dicho\n- common – indica si el mensaje es común o específico\n- codeHTTP – contiene el código HTTP asociado al mensaje de error\n- description – contiene la descripción del mensaje de error\n- text – contiene el texto asociado al mensaje de error\n- type – contiene el tipo del mensaje: service, syntax, server, …\n- group – contiene el grupo propietario del mensaje\n",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "common": {
+            "type": "string"
+          },
+          "codeHTTP": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "exceptionsEnvironmentResponseAuth": {
+      "title": "exceptionsEnvironmentResponseAuth",
+      "description": "Devuelve el listado de los mensajes de error con el siguiente modelo de datos:\nDonde a primer nivel nos encontramos con una lista formada por componentes que contienen los siguientes campos:\n- key – contiene el código interno del mensaje de error dentro de TER\n- id – contiene el identificador del mensaje de error. Dicho identificador no tiene por qué ser único\n- mensaje – contiene el mensaje propiamente dicho\n- common – indica si el mensaje es común o específico\n- codeHTTP – contiene el código HTTP asociado al mensaje de error\n- description – contiene la descripción del mensaje de error\n- text – contiene el texto asociado al mensaje de error\n- type – contiene el tipo del mensaje: service, syntax, server, …\n- group – contiene el grupo propietario del mensaje\n- authorized – contiene un indicador de si el usuario se encuentra autorizado para modificar la excepción\n",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "common": {
+            "type": "string"
+          },
+          "codeHTTP": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          },
+          "authorized": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "getEnvironmentByKeyResponse": {
+      "title": "getEnvironmentByKeyResponse",
+      "description": "Devuelve el detalle del mensaje de error con el siguiente modelo de datos:",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "common": {
+            "type": "string"
+          },
+          "codeHTTP": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          },
+          "authorized": {
+            "type": "boolean"
+          }
+        },
+        "description": "Donde nos encontramos los siguientes campos:\n- key – contiene el código interno del mensaje de error dentro de TER\n- id – contiene el identificador del mensaje de error. Dicho identificador no tiene por qué ser único\n- mensaje – contiene el mensaje propiamente dicho\n- common – indica si el mensaje es común o específico\n- codeHTTP – contiene el código HTTP asociado al mensaje de error\n- description – contiene la descripción del mensaje de error\n- text – contiene el texto asociado al mensaje de error\n- type – contiene el tipo del mensaje: service, syntax, server, …\n- group – contiene el grupo propietario del mensaje\n"
+      }
+    },
+    "getEnvironmentByIdResponse": {
+      "title": "getEnvironmentByIdResponse",
+      "description": "Devuelve el detalle del mensaje de error con el siguiente modelo de datos:",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "common": {
+            "type": "string"
+          },
+          "codeHTTP": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          },
+          "authorized": {
+            "type": "boolean"
+          }
+        },
+        "description": "Donde nos encontramos los siguientes campos:\n- key – contiene el código interno del mensaje de error dentro de TER\n- id – contiene el identificador del mensaje de error. Dicho identificador no tiene por qué ser único\n- mensaje – contiene el mensaje propiamente dicho\n- common – indica si el mensaje es común o específico\n- codeHTTP – contiene el código HTTP asociado al mensaje de error\n- description – contiene la descripción del mensaje de error\n- text – contiene el texto asociado al mensaje de error\n- type – contiene el tipo del mensaje: service, syntax, server, …\n- group – contiene el grupo propietario del mensaje  \n"
+      }
+    }
+  }
+}
